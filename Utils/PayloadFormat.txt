@@ -1,0 +1,15 @@
+{
+  "baseUrl": "https://api.example.com",
+  "endpoints": {
+    "sendData": "/send-data",
+    "getData": "/get-data"
+  },
+  "payload": {
+    "email": "email",
+    "ethereum": "ethAddress",
+    "telegram": "telegramUsername",
+    "twitter": "twitterUsername",
+    "solana": "solanaAddress",
+    "repost": "repostLink"
+  }
+}

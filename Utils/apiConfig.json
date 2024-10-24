@@ -1,0 +1,13 @@
+{
+  "baseUrl": "https://script.google.com/macros/s/AKfycbwVWbZmA7Z_FcnYjVNwVzpFbZ2bDTbmPpkn3SLP-t310gLnWOl1lgSX2HgULGMRQ2xw",
+  "endpoints": {
+    "sendData": "/exec",
+    "getData": "/get-data"
+  },
+  "payload": {
+    "telegram-username": "telegramUsername",
+    "twitter-username": "twitterUsername",
+    "twitter-repost": "repostLink",
+    "wallet": "ethAddress"
+  }
+}

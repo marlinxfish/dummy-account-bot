@@ -18,7 +18,7 @@ Bot ini adalah alat otomatis untuk menghasilkan dan mengirim data akun ke API te
 
 ## Persyaratan
 
-- Node.js (versi 12 atau lebih baru)
+- Node.js (versi 18 atau lebih baru)
 - NPM (Node Package Manager)
 
 ## Instalasi

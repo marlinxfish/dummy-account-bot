@@ -3,7 +3,7 @@ const { uniqueUsernameGenerator, adjectives, nouns } = require("unique-username-
 
 function generateRepostLinks(twitterUsernames) {
   const repostLinks = twitterUsernames.map((username) => {
-    const tweetId = Math.floor(1000000000000000000 + Math.random() * 9000000000000000000); // Generate random 19-digit tweet ID
+    const tweetId = Math.floor(1000000000000000000 + Math.random() * 9000000000000000000);
     return `https://x.com/${username}/status/${tweetId}`;
   });
   return repostLinks;

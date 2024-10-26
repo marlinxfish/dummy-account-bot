@@ -19,30 +19,59 @@ function question(query) {
   return new Promise((resolve) => rl.question(query, resolve));
 }
 
-async function generateAccounts(accountCount) {
-  const twitterUsernames = generateTwitterUsernames(accountCount);
-  const telegramUsernames = generateTelegramUsernames(accountCount);
-  const etherAddresses = generateEthereumAddresses(accountCount);
-  const repostLinks = generateRepostLinks(twitterUsernames);
-  const solanaAddresses = generateSolanaAddresses(accountCount);
-  const emails = generateEmails(accountCount);
+async function generateAccounts(accountCount, selectedData) {
+  const accounts = [];
 
-  saveTwitterToFile(twitterUsernames);
-  saveTelegramToFile(telegramUsernames);
-  saveEtherToFile(etherAddresses);
-  saveRepostLinksToFile(repostLinks);
-  saveSolanaToFile(solanaAddresses);
-  saveEmailToFile(emails);
+  if (selectedData.includes("1")) {
+    const emails = generateEmails(accountCount);
+    saveEmailToFile(emails);
+    for (let i = 0; i < accountCount; i++) {
+      accounts[i] = { email: emails[i] };
+    }
+  }
 
-  return Array.from({ length: accountCount }, (_, i) => ({
-    akun: `akun${i + 1}`,
-    ethAddress: etherAddresses[i].address,
-    solanaAddress: solanaAddresses[i].address,
-    email: emails[i],
-    telegramUsername: telegramUsernames[i],
-    twitterUsername: twitterUsernames[i],
-    repostLink: repostLinks[i],
-  }));
+  if (selectedData.includes("2")) {
+    const telegramUsernames = generateTelegramUsernames(accountCount);
+    saveTelegramToFile(telegramUsernames);
+    for (let i = 0; i < accountCount; i++) {
+      accounts[i] = { ...accounts[i], telegramUsername: telegramUsernames[i] };
+    }
+  }
+
+  if (selectedData.includes("3")) {
+    const twitterUsernames = generateTwitterUsernames(accountCount);
+    saveTwitterToFile(twitterUsernames);
+    for (let i = 0; i < accountCount; i++) {
+      accounts[i] = { ...accounts[i], twitterUsername: twitterUsernames[i] };
+    }
+  }
+
+  if (selectedData.includes("4")) {
+    const etherAddresses = generateEthereumAddresses(accountCount);
+    saveEtherToFile(etherAddresses);
+    for (let i = 0; i < accountCount; i++) {
+      accounts[i] = { ...accounts[i], ethAddress: etherAddresses[i].address };
+    }
+  }
+
+  if (selectedData.includes("5")) {
+    const solanaAddresses = generateSolanaAddresses(accountCount);
+    saveSolanaToFile(solanaAddresses);
+    for (let i = 0; i < accountCount; i++) {
+      accounts[i] = { ...accounts[i], solanaAddress: solanaAddresses[i].address };
+    }
+  }
+
+  if (selectedData.includes("6")) {
+    const twitterUsernames = generateTwitterUsernames(accountCount);
+    const repostLinks = generateRepostLinks(twitterUsernames);
+    saveRepostLinksToFile(repostLinks);
+    for (let i = 0; i < accountCount; i++) {
+      accounts[i] = { ...accounts[i], repostLink: repostLinks[i] };
+    }
+  }
+
+  return accounts;
 }
 
 async function selectDataToSend() {
@@ -61,16 +90,13 @@ async function selectDataToSend() {
 async function runMainProgram() {
   try {
     const accountCount = parseInt(await question(chalk.cyan("Berapa banyak akun yang ingin dihasilkan? ")), 10);
+    const selectedData = await selectDataToSend();
 
     console.log(chalk.yellow("\nMenghasilkan akun..."));
-    const accounts = await generateAccounts(accountCount);
+    const accounts = await generateAccounts(accountCount, selectedData);
 
     fs.writeFileSync("./Result/accounts.json", JSON.stringify(accounts, null, 2));
     console.log(chalk.green("Data akun berhasil disimpan ke accounts.json"));
-
-    const selectedData = await selectDataToSend();
-
-    rl.close();
 
     console.log(chalk.yellow("\nMengirim data ke API..."));
     await sendAllDataToApi(accounts, selectedData);

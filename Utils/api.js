@@ -11,7 +11,6 @@ async function sendDataToApi(account) {
   const url = `${apiConfig.baseUrl}${apiConfig.endpoints.sendData}`;
   const payload = {};
 
-  // Membuat payload berdasarkan konfigurasi dan data akun
   for (const [key, value] of Object.entries(apiConfig.payload)) {
     if (account[value]) {
       payload[key] = account[value];
@@ -43,7 +42,7 @@ async function sendAllDataToApi() {
   for (const account of accounts) {
     const result = await sendDataToApi(account);
     console.log(`Status code untuk ${account.akun}:`, result.status);
-    await delay(5000); // Tunggu 5 detik antara pengiriman
+    await delay(5000);
   }
 }
 

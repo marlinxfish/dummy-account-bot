@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { faker } = require("@faker-js/faker");
 
-const domains = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "customdomain.com"];
+const domains = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "marlin.com"];
 
 function generateEmails(count) {
   const emails = [];

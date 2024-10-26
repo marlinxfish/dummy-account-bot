@@ -35,8 +35,8 @@ function displayHeader(data, callback) {
     setTimeout(() => {
       spinner.stop();
 
-      console.clear(); // Membersihkan konsol
-      console.log(chalk.red(skull)); // Menampilkan tengkorak dengan warna merah
+      console.clear();
+      console.log(chalk.red(skull));
       console.log(chalk.yellow("                Masih Muda Masih Aja Pakai Bot Dasar Pemalas"));
       console.log(chalk.gray("=".repeat(50)));
       console.log(chalk.blue(data));
@@ -44,7 +44,6 @@ function displayHeader(data, callback) {
       console.log(chalk.magenta("Komunitas Ternak Lele"));
       console.log(chalk.gray("=".repeat(50)));
 
-      // Memanggil callback setelah spinner berhenti
       if (callback) callback();
     }, 2000);
   }, 1000);

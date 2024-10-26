@@ -1,13 +1,15 @@
 {
-  "baseUrl": "https://script.google.com/macros/s/AKfycbwVWbZmA7Z_FcnYjVNwVzpFbZ2bDTbmPpkn3SLP-t310gLnWOl1lgSX2HgULGMRQ2xw",
+  "baseUrl": "https://api.example.com",
   "endpoints": {
-    "sendData": "/exec",
+    "sendData": "/send-data",
     "getData": "/get-data"
   },
   "payload": {
-    "telegram-username": "telegramUsername",
-    "twitter-username": "twitterUsername",
-    "twitter-repost": "repostLink",
-    "wallet": "ethAddress"
+    "email": "email",
+    "ethereum": "ethAddress",
+    "telegram": "telegramUsername",
+    "twitter": "twitterUsername",
+    "solana": "solanaAddress",
+    "repost": "repostLink"
   }
 }

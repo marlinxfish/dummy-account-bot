@@ -22,53 +22,47 @@ function question(query) {
 async function generateAccounts(accountCount, selectedData) {
   const accounts = [];
 
-  if (selectedData.includes("1")) {
-    const emails = generateEmails(accountCount);
-    saveEmailToFile(emails);
-    for (let i = 0; i < accountCount; i++) {
-      accounts[i] = { email: emails[i] };
-    }
-  }
+  for (let i = 0; i < accountCount; i++) {
+    const account = { akun: `Akun ${i + 1}` };
 
-  if (selectedData.includes("2")) {
-    const telegramUsernames = generateTelegramUsernames(accountCount);
-    saveTelegramToFile(telegramUsernames);
-    for (let i = 0; i < accountCount; i++) {
-      accounts[i] = { ...accounts[i], telegramUsername: telegramUsernames[i] };
+    if (selectedData.includes("1")) {
+      const emails = generateEmails(accountCount);
+      saveEmailToFile(emails);
+      account.email = emails[i];
     }
-  }
 
-  if (selectedData.includes("3")) {
-    const twitterUsernames = generateTwitterUsernames(accountCount);
-    saveTwitterToFile(twitterUsernames);
-    for (let i = 0; i < accountCount; i++) {
-      accounts[i] = { ...accounts[i], twitterUsername: twitterUsernames[i] };
+    if (selectedData.includes("2")) {
+      const telegramUsernames = generateTelegramUsernames(accountCount);
+      saveTelegramToFile(telegramUsernames);
+      account.telegramUsername = telegramUsernames[i];
     }
-  }
 
-  if (selectedData.includes("4")) {
-    const etherAddresses = generateEthereumAddresses(accountCount);
-    saveEtherToFile(etherAddresses);
-    for (let i = 0; i < accountCount; i++) {
-      accounts[i] = { ...accounts[i], ethAddress: etherAddresses[i].address };
+    if (selectedData.includes("3")) {
+      const twitterUsernames = generateTwitterUsernames(accountCount);
+      saveTwitterToFile(twitterUsernames);
+      account.twitterUsername = twitterUsernames[i];
     }
-  }
 
-  if (selectedData.includes("5")) {
-    const solanaAddresses = generateSolanaAddresses(accountCount);
-    saveSolanaToFile(solanaAddresses);
-    for (let i = 0; i < accountCount; i++) {
-      accounts[i] = { ...accounts[i], solanaAddress: solanaAddresses[i].address };
+    if (selectedData.includes("4")) {
+      const etherAddresses = generateEthereumAddresses(accountCount);
+      saveEtherToFile(etherAddresses);
+      account.ethAddress = etherAddresses[i].address;
     }
-  }
 
-  if (selectedData.includes("6")) {
-    const twitterUsernames = generateTwitterUsernames(accountCount);
-    const repostLinks = generateRepostLinks(twitterUsernames);
-    saveRepostLinksToFile(repostLinks);
-    for (let i = 0; i < accountCount; i++) {
-      accounts[i] = { ...accounts[i], repostLink: repostLinks[i] };
+    if (selectedData.includes("5")) {
+      const solanaAddresses = generateSolanaAddresses(accountCount);
+      saveSolanaToFile(solanaAddresses);
+      account.solanaAddress = solanaAddresses[i].address;
     }
+
+    if (selectedData.includes("6")) {
+      const twitterUsernames = generateTwitterUsernames(accountCount);
+      const repostLinks = generateRepostLinks(twitterUsernames);
+      saveRepostLinksToFile(repostLinks);
+      account.repostLink = repostLinks[i];
+    }
+
+    accounts.push(account);
   }
 
   return accounts;
@@ -101,6 +95,7 @@ async function runMainProgram() {
     console.log(chalk.yellow("\nMengirim data ke API..."));
     await sendAllDataToApi(accounts, selectedData);
     console.log(chalk.green("Semua data akun yang dipilih berhasil dikirim ke API."));
+    process.exit(0);
   } catch (error) {
     console.error(chalk.red("Terjadi kesalahan:"), error);
   }

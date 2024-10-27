@@ -22,43 +22,67 @@ function question(query) {
 async function generateAccounts(accountCount, selectedData) {
   const accounts = [];
 
+  let emails = [];
+  let telegramUsernames = [];
+  let twitterUsernames = [];
+  let etherAddresses = [];
+  let solanaAddresses = [];
+  let repostLinks = [];
+
+  if (selectedData.includes("1")) {
+    emails = generateEmails(accountCount);
+    saveEmailToFile(emails);
+  }
+
+  if (selectedData.includes("2")) {
+    telegramUsernames = generateTelegramUsernames(accountCount);
+    saveTelegramToFile(telegramUsernames);
+  }
+
+  if (selectedData.includes("3")) {
+    twitterUsernames = generateTwitterUsernames(accountCount);
+    saveTwitterToFile(twitterUsernames);
+  }
+
+  if (selectedData.includes("4")) {
+    etherAddresses = generateEthereumAddresses(accountCount);
+    saveEtherToFile(etherAddresses);
+  }
+
+  if (selectedData.includes("5")) {
+    solanaAddresses = generateSolanaAddresses(accountCount);
+    saveSolanaToFile(solanaAddresses);
+  }
+
+  if (selectedData.includes("6")) {
+    const repostLinks = generateRepostLinks(twitterUsernames);
+    saveRepostLinksToFile(repostLinks);
+  }
+
   for (let i = 0; i < accountCount; i++) {
     const account = { akun: `Akun ${i + 1}` };
 
     if (selectedData.includes("1")) {
-      const emails = generateEmails(accountCount);
-      saveEmailToFile(emails);
       account.email = emails[i];
     }
 
     if (selectedData.includes("2")) {
-      const telegramUsernames = generateTelegramUsernames(accountCount);
-      saveTelegramToFile(telegramUsernames);
       account.telegramUsername = telegramUsernames[i];
     }
 
     if (selectedData.includes("3")) {
-      const twitterUsernames = generateTwitterUsernames(accountCount);
-      saveTwitterToFile(twitterUsernames);
       account.twitterUsername = twitterUsernames[i];
     }
 
     if (selectedData.includes("4")) {
-      const etherAddresses = generateEthereumAddresses(accountCount);
-      saveEtherToFile(etherAddresses);
       account.ethAddress = etherAddresses[i].address;
     }
 
     if (selectedData.includes("5")) {
-      const solanaAddresses = generateSolanaAddresses(accountCount);
-      saveSolanaToFile(solanaAddresses);
       account.solanaAddress = solanaAddresses[i].address;
     }
 
     if (selectedData.includes("6")) {
-      const twitterUsernames = generateTwitterUsernames(accountCount);
-      const repostLinks = generateRepostLinks(twitterUsernames);
-      saveRepostLinksToFile(repostLinks);
       account.repostLink = repostLinks[i];
     }
 

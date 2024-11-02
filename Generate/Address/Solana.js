@@ -25,6 +25,7 @@ function saveToFile(addresses) {
   const content = addresses.map((addr) => `Address: ${addr.address}, Private Key: ${addr.privateKey.join(", ")}`).join("\n");
 
   fs.writeFileSync(path.join(resultDir, "Solana.txt"), content);
+  console.log("Data Solana Address berhasil disimpan ke Solana.txt di dalam folder Result");
 }
 
 module.exports = {

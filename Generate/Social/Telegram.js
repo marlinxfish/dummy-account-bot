@@ -24,7 +24,7 @@ function saveToFile(usernames) {
     fs.mkdirSync(resultDir);
   }
   fs.writeFileSync(path.join(resultDir, "TelegramUsernames.txt"), usernames.join("\n"));
-  console.log(`Data berhasil disimpan ke TelegramUsernames.txt di dalam folder Result`);
+  console.log(`Data Telegram berhasil disimpan ke TelegramUsernames.txt di dalam folder Result`);
 }
 
 module.exports = {

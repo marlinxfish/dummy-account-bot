@@ -10,10 +10,13 @@
   "author": "Marlin",
   "license": "ISC",
   "dependencies": {
+    "@kaspa/core-lib": "^1.6.5",
+    "@kaspa/wallet": "^1.4.26",
     "@solana/web3.js": "^1.95.4",
     "axios": "^1.7.7",
     "bot_auto_send": "file:",
     "chalk": "^4.1.2",
+    "crypto": "^1.0.1",
     "ethers": "^6.13.4",
     "form-data": "^4.0.1",
     "fs": "^0.0.1-security",

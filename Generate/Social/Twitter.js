@@ -24,7 +24,7 @@ function saveToFile(usernames) {
     fs.mkdirSync(resultDir);
   }
   fs.writeFileSync(path.join(resultDir, "TwitterUsernames.txt"), usernames.join("\n"));
-  console.log(`Data berhasil disimpan ke TwitterUsernames.txt di dalam folder Result`);
+  console.log(`Data Twitter berhasil disimpan ke TwitterUsernames.txt di dalam folder Result`);
 }
 
 module.exports = {

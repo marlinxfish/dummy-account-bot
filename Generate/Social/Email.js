@@ -27,7 +27,7 @@ function saveToFile(data) {
   const content = data.join("\n");
 
   fs.writeFileSync(filePath, content);
-  console.log(`Data berhasil disimpan ke ${filePath}`);
+  console.log(`Data Email berhasil disimpan ke ${filePath}`);
 }
 
 module.exports = {

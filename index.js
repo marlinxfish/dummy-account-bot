@@ -7,6 +7,7 @@ const { generateTelegramUsernames, saveToFile: saveTelegramToFile } = require(".
 const { generateEthereumAddresses, saveToFile: saveEtherToFile } = require("./Generate/Address/Ether");
 const { generateRepostLinks, saveToFile: saveRepostLinksToFile } = require("./Generate/Social/Repost");
 const { generateSolanaAddresses, saveToFile: saveSolanaToFile } = require("./Generate/Address/Solana");
+const { generateKaspaAddresses, saveToFile: saveKaspaToFile } = require("./Generate/Address/Kaspa");
 const { generateEmails, saveToFile: saveEmailToFile } = require("./Generate/Social/Email");
 const { sendAllDataToApi } = require("./Utils/api");
 
@@ -27,6 +28,7 @@ async function generateAccounts(accountCount, selectedData) {
   let twitterUsernames = [];
   let etherAddresses = [];
   let solanaAddresses = [];
+  let kaspaAddresses = [];
   let repostLinks = [];
 
   if (selectedData.includes("1")) {
@@ -59,6 +61,11 @@ async function generateAccounts(accountCount, selectedData) {
     saveRepostLinksToFile(repostLinks);
   }
 
+  if (selectedData.includes("7")) {
+    kaspaAddresses = await generateKaspaAddresses(accountCount);
+    saveKaspaToFile(kaspaAddresses);
+  }
+
   for (let i = 0; i < accountCount; i++) {
     const account = { akun: `Akun ${i + 1}` };
 
@@ -86,6 +93,10 @@ async function generateAccounts(accountCount, selectedData) {
       account.repostLink = repostLinks[i];
     }
 
+    if (selectedData.includes("7")) {
+      account.kaspaAddress = kaspaAddresses[i].address;
+    }
+
     accounts.push(account);
   }
 
@@ -100,6 +111,7 @@ async function selectDataToSend() {
   console.log(chalk.yellow("4. Ethereum Address"));
   console.log(chalk.yellow("5. Solana Address"));
   console.log(chalk.yellow("6. Repost Link"));
+  console.log(chalk.yellow("7. Kaspa Address"));
 
   const selectedDataInput = await question(chalk.green("Masukkan nomor pilihan Anda: "));
   return selectedDataInput.split(",").map((num) => num.trim());

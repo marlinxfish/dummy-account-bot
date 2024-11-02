@@ -25,6 +25,7 @@ function saveToFile(addresses) {
   const content = addresses.map((addr) => `Address: ${addr.address}, Private Key: ${addr.privateKey}`).join("\n");
 
   fs.writeFileSync(path.join(resultDir, "Ethereum.txt"), content);
+  console.log("Data Etherium Address berhasil disimpan ke Ethereum.txt di dalam folder Result");
 }
 
 module.exports = {
